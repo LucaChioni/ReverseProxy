@@ -23,7 +23,9 @@ services:
 
 volumes:
   certbot_data:
+    name: reverse-proxy_certbot_data
   certbot_config:
+    name: reverse-proxy-certbot-config
 
 networks:
   reverse-proxy:
