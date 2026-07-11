@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
   # allows you to run this workflow from other repositories
   workflow_call:
