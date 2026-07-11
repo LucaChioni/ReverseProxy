@@ -1,0 +1,33 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../personal-website/frontend:/srv:ro
+      - certbot_data:/var/www/certbot:ro
+      - certbot_config:/etc/letsencrypt:ro
+    depends_on:
+      - backend
+    networks:
+      - web
+      - internal
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - certbot_data:/var/www/certbot
+      - certbot_config:/etc/letsencrypt
+    networks:
+      - web
+
+volumes:
+  certbot_data:
+  certbot_config:
+
+networks:
+  web:
+    name: web
