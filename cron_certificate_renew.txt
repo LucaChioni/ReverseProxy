@@ -1,1 +1,0 @@
-0 3 * * * cd /opt/reverse-proxy && docker compose run --rm certbot renew --quiet && docker compose exec nginx nginx -s reload >> /var/log/certbot-renew.log 2>&1
