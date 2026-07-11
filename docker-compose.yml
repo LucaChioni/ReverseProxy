@@ -9,11 +9,8 @@ services:
       - ../personal-website/frontend:/srv:ro
       - certbot_data:/var/www/certbot:ro
       - certbot_config:/etc/letsencrypt:ro
-    depends_on:
-      - backend
     networks:
-      - web
-      - internal
+      - reverse-proxy
     restart: unless-stopped
 
   certbot:
@@ -22,12 +19,12 @@ services:
       - certbot_data:/var/www/certbot
       - certbot_config:/etc/letsencrypt
     networks:
-      - web
+      - reverse-proxy
 
 volumes:
   certbot_data:
   certbot_config:
 
 networks:
-  web:
-    name: web
+  reverse-proxy:
+    name: reverse-proxy
